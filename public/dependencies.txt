@@ -1,0 +1,12 @@
+yarn add @aws-sdk/client-s3
+
+yarn add multiparty
+
+//reads the file
+yarn add mime-types
+
+yarn add react-spinners
+
+yarn add react-sortablejs
+
+yarn add sortablejs
