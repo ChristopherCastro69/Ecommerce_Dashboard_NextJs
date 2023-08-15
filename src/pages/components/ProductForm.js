@@ -64,8 +64,8 @@ export default function ProductForm({
             }
         }
 
-        function updateImagesOrder(){
-            console.log(arguments);
+        function updateImagesOrder(images){
+            setImages(images);
         }
 
     return (
