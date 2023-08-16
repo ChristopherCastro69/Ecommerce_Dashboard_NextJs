@@ -8,6 +8,7 @@ function Categories({swal}){
     const [name, setName] = useState('');
     const [categories, setCategories] = useState([]);
     const [parentCategory, setParentCategory] = useState('');
+    const [properties, setProperties] = useState([]);
 
     useEffect(() => {
         fetchCategories();
@@ -60,17 +61,42 @@ function Categories({swal}){
             // when promise rejected...
         });
     }
+
+    function addProperty(){
+        setProperties(prev => {
+            return [...prev, {name:'', values:''}];
+        })
+    }
+
+    function handlePropertyNameChange(index, property, newName){
+       setProperties(prev => {
+        const properties = [...prev];
+        properties[index].name = newName;
+        return properties;
+       });
+    }
+
+    function handlePropertyValuesChange(index, property, newValues){
+        setProperties(prev => {
+            const properties = [...prev];
+            properties[index].values = newValues;
+            return properties;
+        });
+    }
+
     return(
         <Layout>
 
             <h1>Categories</h1>
 
-            <label >
-                {editedCategory 
-                ? 'Edit Category' 
-                : 'Create New Category'}</label>
+            <label>
+                {editedCategory
+                ? `Edit category ${editedCategory.name}`
+                : 'Create new category'}
+            </label>
 
-            <form onSubmit={saveCategory} className="flex gap-1">
+            <form onSubmit={saveCategory}>
+                <div className="flex gap-1">
 
                 <input className="mb-0" 
                         type="text" 
@@ -90,6 +116,32 @@ function Categories({swal}){
                         </option>
                     ))}
                 </select>
+                </div>
+                <div  className="mt-3 mb-4">
+                    <label className="block">Properties</label>
+                    <button 
+                    onClick={addProperty}
+                    type="button" 
+                    className="btn-default text-sm">Add new property</button>
+
+                    {properties.length > 0 && properties.map((property, index) => (
+                        <div className="flex gap-1">
+                            <input 
+                            type="text" 
+                            value = {property.name}
+                            onChange={ev => handlePropertyNameChange(index, property,ev.target.value)}
+                            placeholder="property name (example: color)" />
+
+                            <input 
+                            type="text" 
+                            onChange={ev => handlePropertyValuesChange(index, property,ev.target.value)}
+                            value={property.values}
+                            placeholder="values, comma separated" />
+                        </div>
+
+                    ))}
+                </div>
+               
 
                 <button type={'submit'} className="btn-primary py-1 ">Save</button>
 
