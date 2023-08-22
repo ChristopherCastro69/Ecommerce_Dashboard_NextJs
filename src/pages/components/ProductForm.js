@@ -54,21 +54,20 @@ export default function ProductForm({
             category,
             properties: productProperties
         };
-        if (_id) {
-            //update
-
-            await axios.put('/api/products', {
-                ...data,
-                _id
-            });
-
-        } else {
-            //create
-
-            await axios.post('/api/products', data);
-
+         console.log("Data being sent:", data); // Add this line
+         try {
+            if (_id) {
+                await axios.put('/api/products', {
+                    ...data,
+                    _id
+                });
+            } else {
+                await axios.post('/api/products', data);
+            }
+            setGoToProducts(true);
+        } catch (error) {
+            console.error("Error saving product:", error);
         }
-        setGoToProducts(true);
 
     }
     if (goToProducts) {

@@ -16,7 +16,7 @@ export default function EditProductPage() {
             setProductInfo(response.data);
         })
     }, [id]);
-    console.log({router});
+   
     
     return (
         <Layout>

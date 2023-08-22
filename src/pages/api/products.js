@@ -1,13 +1,14 @@
 
 import { mongooseConnect } from "@/lib/mongoose";
 import {Product} from "@/pages/api/models/Product";
+import { isAdminRequest } from "./auth/[...nextauth]";
 
 //Main product from Mongo DB
 export default async function handle(req, res){    
     // res.json(req.method);
     const {method} = req;
     await mongooseConnect();
-
+    // await isAdminRequest(req, res);
     //Read
     if(method === 'GET'){
         // if naay id
@@ -22,9 +23,12 @@ export default async function handle(req, res){
     //Create
     if (method === 'POST') {
         const {title,description,price,images,category,properties} = req.body;
+        console.log("Received properties:", properties); 
+      
         const productDoc = await Product.create({
           title,description,price,images,category,properties,
         })
+        console.log("Created product:", productDoc);
         res.json(productDoc);
       }
 
@@ -34,6 +38,10 @@ export default async function handle(req, res){
        
         await Product.updateOne({_id}, {title, description, price, images, category, properties});
         res.json(true);
+
+        // In the PUT handler
+        const updateResult = await Product.updateOne({ _id }, { title, description, price, images, category, properties });
+        console.log("Update result:", updateResult);
     }   
 
     //Delete
