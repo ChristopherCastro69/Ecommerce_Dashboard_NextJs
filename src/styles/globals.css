@@ -42,11 +42,11 @@ input:focus, textarea:focus, select:focus{
 }
 
 h1{
-  @apply text-white text-xl mb-2;
+  @apply text-gray-200 text-xl mb-4 ;
 }
 
 label{
-  @apply text-white;
+  @apply text-gray-300 text-sm;
 }
 
 .btn-primary{
@@ -54,19 +54,19 @@ label{
 }
 
 table{
-  @apply w-full;
+  @apply w-full rounded-sm shadow-sm; 
 }
 
 table thead tr td{
-  @apply bg-emerald-950;
+  @apply bg-gray-950 uppercase border-b border-gray-800 ;
 }
 
 table tr td{
-  @apply border p-1;
+  @apply  p-4 py-1;
 }
 
 table a{
-  @apply bg-blue-900 text-sm p-1 py-1 px-2 rounded-md inline-flex gap-1 m-2 mr-1;
+  @apply bg-gray-600 text-sm p-1 py-1 px-2 rounded-md inline-flex gap-1 m-2 mr-1 mx-1 items-center ;
 }
 
 .btn-default,.btn-red{

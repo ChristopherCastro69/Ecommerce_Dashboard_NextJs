@@ -182,7 +182,7 @@ export default function ProductForm({
                     setList={updateImagesOrder}>
                     {!!images
                         ?.length && images.map(link => (
-                            <div key={link} className=" h-24">
+                            <div key={link} className=" h-24 shadow-sm rounded-sm border border-gray-200">
                                 <img src={link} alt="" className="rounded-lg"/>
                             </div>
                         ))}
@@ -195,7 +195,7 @@ export default function ProductForm({
                 )}
                 <label
                     className="w-24 h-24 cursor-pointer border text-center flex flex-col items-center
-                                   justify-center text-sm gap-1 rounded-lg text-gray-400">
+                                   justify-center text-sm gap-1 rounded-lg text-gray-400 shadow-md">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
