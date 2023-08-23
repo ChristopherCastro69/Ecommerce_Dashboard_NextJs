@@ -1,9 +1,12 @@
 import Layout from "@/pages/components/Layout"
 import { useSession } from "next-auth/react"
+import { SessionProvider } from "next-auth/react";
 
 export default function Home() {
   const {data: session} = useSession();
-  if(!session) return;
+  if(!session){
+    
+  }
  
 
   return <Layout>

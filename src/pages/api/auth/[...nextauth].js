@@ -7,7 +7,7 @@ const adminEmails = ['topitops123@gmail.com']
 
 export const authOptions = {
   // Configure one or more authentication providers
-  // secret: process.env.SECRET,
+  secret: process.env.SECRET,
   providers: [
    
     GoogleProvider({
@@ -33,9 +33,9 @@ export const authOptions = {
 
 export default NextAuth(authOptions);
 
-// export async function isAdminRequest(req, res){
-//     const session = await getServerSession(req, res, authOptions);
-//     if(!adminEmails.includes(session?.user?.email)){
-//       throw 'not admin'
-//     }
-// }
+export async function isAdminRequest(req, res){
+    const session = await getServerSession(req, res, authOptions);
+    if(!adminEmails.includes(session?.user?.email)){
+      throw 'not admin'
+    }
+}
