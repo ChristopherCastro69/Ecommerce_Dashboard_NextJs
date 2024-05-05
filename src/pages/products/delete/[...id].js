@@ -3,45 +3,45 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function DeleteProductPage(){
-    const router = useRouter();
-    const {id} = router.query;
-    const [productInfo, setProductInfo] = useState();
-    useEffect(() => {
-        if(!id){
-            return;
-        }
-        axios.get('/api/products?id='+id).then(response => {
-            setProductInfo(response.data);
-        });
-    },[id])
-
-    //functions
-    function goBack(){
-        router.push('/products');
+export default function DeleteProductPage() {
+  const router = useRouter();
+  const { id } = router.query;
+  const [productInfo, setProductInfo] = useState();
+  useEffect(() => {
+    if (!id) {
+      return;
     }
+    axios.get("/api/products?id=" + id).then((response) => {
+      setProductInfo(response.data);
+    });
+  }, [id]);
 
-    async function deleteProduct(){
-        await axios.delete('/api/products?id='+id);
-        goBack();
-    }
+  //functions
+  function goBack() {
+    router.push("/products");
+  }
 
-    return(
-        <Layout>
-            <h1 className="text-center">
-            Are you sure you want to delete product
-            &nbsp; "{productInfo?.title}"?
-            </h1>
+  async function deleteProduct() {
+    await axios.delete("/api/products?id=" + id);
+    goBack();
+  }
 
-            <div className="flex gap-2 justify-center">
-                <button className="btn-red"
-                onClick={deleteProduct}>Yes</button>
+  return (
+    <Layout>
+      <h1 className="text-center">
+        Are you sure you want to delete product &nbsp;&quot;{productInfo?.title}
+        &quot;?
+      </h1>
 
-                <button className="btn-default"
-                onClick={goBack}>No</button>
+      <div className="flex gap-2 justify-center">
+        <button className="btn-red" onClick={deleteProduct}>
+          Yes
+        </button>
 
-            </div>
-          
-        </Layout>
-    )
+        <button className="btn-default" onClick={goBack}>
+          No
+        </button>
+      </div>
+    </Layout>
+  );
 }
